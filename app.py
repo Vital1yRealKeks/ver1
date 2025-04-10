@@ -1,4 +1,3 @@
-
 from flask import Flask
 from extensions import db, bcrypt, login_manager, migrate, csrf
 from models import User
@@ -37,8 +36,6 @@ def create_app(config_class=Config):
     def load_user(user_id):
         return User.query.get(int(user_id))
 
-    if not os.path.exists('instance'):
-        os.makedirs('instance')
     # Create database tables
     with app.app_context():
         db.create_all()

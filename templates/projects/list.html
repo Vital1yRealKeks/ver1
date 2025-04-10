@@ -1,39 +1,39 @@
- html
+
 {% extends 'base.html' %}
 
 {% block title %}My Projects - Project Portal{% endblock %}
 
 {% block content %}
-<div class=&quot;row mb-4&quot;>
-    <div class=&quot;col-md-8&quot;>
-        <h1 class=&quot;mb-4&quot;>My Projects</h1>
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="mb-4">My Projects</h1>
     </div>
-    <div class=&quot;col-md-4 text-end&quot;>
-        <a href=&quot;{{ url_for('projects.create_project') }}&quot; class=&quot;btn btn-primary&quot;>
-            <i class=&quot;fas fa-plus me-1&quot;></i>New Project
+    <div class="col-md-4 text-end">
+        <a href="{{ url_for('projects.create_project') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-1"></i>New Project
         </a>
     </div>
 </div>
 
-<div class=&quot;row&quot;>
+<div class="row">
     {% if projects %}
         {% for project in projects %}
-            <div class=&quot;col-md-6 col-lg-4 mb-4&quot;>
-                <div class=&quot;card h-100 shadow-sm&quot;>
-                    <div class=&quot;card-header bg-primary text-white&quot;>
-                        <h5 class=&quot;mb-0&quot;>{{ project.name }}</h5>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">{{ project.name }}</h5>
                     </div>
-                    <div class=&quot;card-body&quot;>
-                        <p class=&quot;card-text&quot;>{{ project.description|truncate(150) if project.description else 'No description' }}</p>
-                        <div class=&quot;d-flex justify-content-between align-items-center&quot;>
-                            <small class=&quot;text-muted&quot;>Created: {{ project.created_at.strftime('%Y-%m-%d') }}</small>
-                            <span class=&quot;badge bg-info&quot;>{{ project.tasks|length }} tasks</span>
+                    <div class="card-body">
+                        <p class="card-text">{{ project.description|truncate(150) if project.description else 'No description' }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">Created: {{ project.created_at.strftime('%Y-%m-%d') }}</small>
+                            <span class="badge bg-info">{{ project.tasks|length }} tasks</span>
                         </div>
                     </div>
-                    <div class=&quot;card-footer&quot;>
-                        <div class=&quot;d-grid gap-2&quot;>
-                            <a href=&quot;{{ url_for('projects.view_project', project_id=project.id) }}&quot; class=&quot;btn btn-outline-primary&quot;>
-                                <i class=&quot;fas fa-eye me-1&quot;></i>View Project
+                    <div class="card-footer">
+                        <div class="d-grid gap-2">
+                            <a href="{{ url_for('projects.view_project', project_id=project.id) }}" class="btn btn-outline-primary">
+                                <i class="fas fa-eye me-1"></i>View Project
                             </a>
                         </div>
                     </div>
@@ -41,13 +41,13 @@
             </div>
         {% endfor %}
     {% else %}
-        <div class=&quot;col-12&quot;>
-            <div class=&quot;alert alert-info&quot;>
-                <i class=&quot;fas fa-info-circle me-2&quot;></i>You don't have any projects yet.
+        <div class="col-12">
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>You don't have any projects yet.
             </div>
-            <div class=&quot;text-center mt-4&quot;>
-                <a href=&quot;{{ url_for('projects.create_project') }}&quot; class=&quot;btn btn-primary&quot;>
-                    <i class=&quot;fas fa-plus me-1&quot;></i>Create Your First Project
+            <div class="text-center mt-4">
+                <a href="{{ url_for('projects.create_project') }}" class="btn btn-primary">
+                    <i class="fas fa-plus me-1"></i>Create Your First Project
                 </a>
             </div>
         </div>

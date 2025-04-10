@@ -1,54 +1,54 @@
- html
+
 {% extends 'base.html' %}
 
 {% block title %}Dashboard - Project Portal{% endblock %}
 
 {% block content %}
-<div class=&quot;row mb-4&quot;>
-    <div class=&quot;col-md-8&quot;>
-        <h1 class=&quot;mb-4&quot;>Welcome, {{ current_user.username }}!</h1>
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="mb-4">Welcome, {{ current_user.username }}!</h1>
     </div>
-    <div class=&quot;col-md-4 text-end&quot;>
-        <a href=&quot;{{ url_for('projects.create_project') }}&quot; class=&quot;btn btn-primary&quot;>
-            <i class=&quot;fas fa-plus me-1&quot;></i>New Project
+    <div class="col-md-4 text-end">
+        <a href="{{ url_for('projects.create_project') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-1"></i>New Project
         </a>
     </div>
 </div>
 
-<div class=&quot;row&quot;>
+<div class="row">
 
-    <div class=&quot;col-md-6 mb-4&quot;>
-        <div class=&quot;card shadow-sm h-100&quot;>
-            <div class=&quot;card-header bg-primary text-white&quot;>
-                <h5 class=&quot;mb-0&quot;>
-                    <i class=&quot;fas fa-project-diagram me-2&quot;></i>My Projects
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-project-diagram me-2"></i>My Projects
                 </h5>
             </div>
-            <div class=&quot;card-body&quot;>
+            <div class="card-body">
                 {% if user_projects %}
-                    <div class=&quot;list-group&quot;>
+                    <div class="list-group">
                         {% for project in user_projects %}
-                            <a href=&quot;{{ url_for('projects.view_project', project_id=project.id) }}&quot; class=&quot;list-group-item list-group-item-action&quot;>
-                                <div class=&quot;d-flex w-100 justify-content-between&quot;>
-                                    <h5 class=&quot;mb-1&quot;>{{ project.name }}</h5>
+                            <a href="{{ url_for('projects.view_project', project_id=project.id) }}" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{ project.name }}</h5>
                                     <small>{{ project.created_at.strftime('%Y-%m-%d') }}</small>
                                 </div>
-                                <p class=&quot;mb-1&quot;>{{ project.description|truncate(100) }}</p>
+                                <p class="mb-1">{{ project.description|truncate(100) }}</p>
                                 <small>
-                                    <span class=&quot;badge bg-info&quot;>{{ project.tasks|length }} tasks</span>
+                                    <span class="badge bg-info">{{ project.tasks|length }} tasks</span>
                                 </small>
                             </a>
                         {% endfor %}
                     </div>
                 {% else %}
-                    <p class=&quot;text-muted&quot;>You don't have any projects yet.</p>
-                    <a href=&quot;{{ url_for('projects.create_project') }}&quot; class=&quot;btn btn-outline-primary&quot;>
-                        <i class=&quot;fas fa-plus me-1&quot;></i>Create Your First Project
+                    <p class="text-muted">You don't have any projects yet.</p>
+                    <a href="{{ url_for('projects.create_project') }}" class="btn btn-outline-primary">
+                        <i class="fas fa-plus me-1"></i>Create Your First Project
                     </a>
                 {% endif %}
             </div>
-            <div class=&quot;card-footer&quot;>
-                <a href=&quot;{{ url_for('projects.list_projects') }}&quot; class=&quot;btn btn-sm btn-outline-primary&quot;>
+            <div class="card-footer">
+                <a href="{{ url_for('projects.list_projects') }}" class="btn btn-sm btn-outline-primary">
                     View All Projects
                 </a>
             </div>
@@ -56,26 +56,26 @@
     </div>
 
 
-    <div class=&quot;col-md-6 mb-4&quot;>
-        <div class=&quot;card shadow-sm h-100&quot;>
-            <div class=&quot;card-header bg-primary text-white&quot;>
-                <h5 class=&quot;mb-0&quot;>
-                    <i class=&quot;fas fa-tasks me-2&quot;></i>My Tasks
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-tasks me-2"></i>My Tasks
                 </h5>
             </div>
-            <div class=&quot;card-body&quot;>
+            <div class="card-body">
                 {% if assigned_tasks %}
-                    <div class=&quot;list-group&quot;>
+                    <div class="list-group">
                         {% for task in assigned_tasks %}
                             {% if task.status != 'Done' %}
-                                <a href=&quot;{{ url_for('tasks.view_task', task_id=task.id) }}&quot; class=&quot;list-group-item list-group-item-action&quot;>
-                                    <div class=&quot;d-flex w-100 justify-content-between&quot;>
-                                        <h5 class=&quot;mb-1&quot;>{{ task.title }}</h5>
-                                        <span class=&quot;badge {% if task.status == 'To Do' %}bg-secondary{% elif task.status == 'In Progress' %}bg-primary{% else %}bg-success{% endif %}&quot;>
+                                <a href="{{ url_for('tasks.view_task', task_id=task.id) }}" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">{{ task.title }}</h5>
+                                        <span class="badge {% if task.status == 'To Do' %}bg-secondary{% elif task.status == 'In Progress' %}bg-primary{% else %}bg-success{% endif %}">
                                             {{ task.status }}
                                         </span>
                                     </div>
-                                    <p class=&quot;mb-1&quot;>{{ task.description|truncate(100) if task.description else 'No description' }}</p>
+                                    <p class="mb-1">{{ task.description|truncate(100) if task.description else 'No description' }}</p>
                                     <small>
                                         Project: {{ task.project.name }}
                                         {% if task.due_date %}
@@ -87,11 +87,11 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    <p class=&quot;text-muted&quot;>You don't have any tasks assigned to you.</p>
+                    <p class="text-muted">You don't have any tasks assigned to you.</p>
                 {% endif %}
             </div>
-            <div class=&quot;card-footer&quot;>
-                <a href=&quot;{{ url_for('tasks.list_tasks') }}&quot; class=&quot;btn btn-sm btn-outline-primary&quot;>
+            <div class="card-footer">
+                <a href="{{ url_for('tasks.list_tasks') }}" class="btn btn-sm btn-outline-primary">
                     View All Tasks
                 </a>
             </div>
@@ -99,38 +99,38 @@
     </div>
 </div>
  html
-<div class=&quot;row&quot;>
+<div class="row">
 
-    <div class=&quot;col-md-6 mb-4&quot;>
-        <div class=&quot;card shadow-sm&quot;>
-            <div class=&quot;card-header bg-primary text-white&quot;>
-                <h5 class=&quot;mb-0&quot;>
-                    <i class=&quot;fas fa-chart-line me-2&quot;></i>Task Summary
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-chart-line me-2"></i>Task Summary
                 </h5>
             </div>
-            <div class=&quot;card-body&quot;>
-                <div class=&quot;row text-center&quot;>
-                    <div class=&quot;col-4&quot;>
-                        <div class=&quot;card bg-light mb-3&quot;>
-                            <div class=&quot;card-body&quot;>
-                                <h3 class=&quot;text-secondary&quot;>{{ assigned_tasks|selectattr('status', 'equalto', 'To Do')|list|length }}</h3>
-                                <p class=&quot;mb-0&quot;>To Do</p>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-4">
+                        <div class="card bg-light mb-3">
+                            <div class="card-body">
+                                <h3 class="text-secondary">{{ assigned_tasks|selectattr('status', 'equalto', 'To Do')|list|length }}</h3>
+                                <p class="mb-0">To Do</p>
                             </div>
                         </div>
                     </div>
-                    <div class=&quot;col-4&quot;>
-                        <div class=&quot;card bg-light mb-3&quot;>
-                            <div class=&quot;card-body&quot;>
-                                <h3 class=&quot;text-primary&quot;>{{ assigned_tasks|selectattr('status', 'equalto', 'In Progress')|list|length }}</h3>
-                                <p class=&quot;mb-0&quot;>In Progress</p>
+                    <div class="col-4">
+                        <div class="card bg-light mb-3">
+                            <div class="card-body">
+                                <h3 class="text-primary">{{ assigned_tasks|selectattr('status', 'equalto', 'In Progress')|list|length }}</h3>
+                                <p class="mb-0">In Progress</p>
                             </div>
                         </div>
                     </div>
-                    <div class=&quot;col-4&quot;>
-                        <div class=&quot;card bg-light mb-3&quot;>
-                            <div class=&quot;card-body&quot;>
-                                <h3 class=&quot;text-success&quot;>{{ assigned_tasks|selectattr('status', 'equalto', 'Done')|list|length }}</h3>
-                                <p class=&quot;mb-0&quot;>Done</p>
+                    <div class="col-4">
+                        <div class="card bg-light mb-3">
+                            <div class="card-body">
+                                <h3 class="text-success">{{ assigned_tasks|selectattr('status', 'equalto', 'Done')|list|length }}</h3>
+                                <p class="mb-0">Done</p>
                             </div>
                         </div>
                     </div>
@@ -140,26 +140,26 @@
     </div>
 
 
-    <div class=&quot;col-md-6 mb-4&quot;>
-        <div class=&quot;card shadow-sm&quot;>
-            <div class=&quot;card-header bg-primary text-white&quot;>
-                <h5 class=&quot;mb-0&quot;>
-                    <i class=&quot;fas fa-robot me-2&quot;></i>Chatbot Assistant
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-robot me-2"></i>Chatbot Assistant
                 </h5>
             </div>
-            <div class=&quot;card-body&quot;>
+            <div class="card-body">
                 <p>Need a quick update? Ask the chatbot assistant!</p>
-                <div class=&quot;d-grid gap-2&quot;>
-                    <a href=&quot;{{ url_for('chatbot.chatbot') }}&quot; class=&quot;btn btn-outline-primary&quot;>
-                        <i class=&quot;fas fa-comments me-2&quot;></i>Open Chatbot
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('chatbot.chatbot') }}" class="btn btn-outline-primary">
+                        <i class="fas fa-comments me-2"></i>Open Chatbot
                     </a>
                 </div>
-                <div class=&quot;mt-3&quot;>
-                    <p class=&quot;mb-1&quot;>Try asking:</p>
-                    <ul class=&quot;list-unstyled&quot;>
-                        <li><small><i class=&quot;fas fa-angle-right me-1&quot;></i>"How many tasks do I have?"</small></li>
-                        <li><small><i class=&quot;fas fa-angle-right me-1&quot;></i>"What are my tasks?"</small></li>
-                        <li><small><i class=&quot;fas fa-angle-right me-1&quot;></i>"What projects am I working on?"</small></li>
+                <div class="mt-3">
+                    <p class="mb-1">Try asking:</p>
+                    <ul class="list-unstyled">
+                        <li><small><i class="fas fa-angle-right me-1"></i>"How many tasks do I have?"</small></li>
+                        <li><small><i class="fas fa-angle-right me-1"></i>"What are my tasks?"</small></li>
+                        <li><small><i class="fas fa-angle-right me-1"></i>"What projects am I working on?"</small></li>
                     </ul>
                 </div>
             </div>

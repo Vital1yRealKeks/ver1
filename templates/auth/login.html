@@ -1,45 +1,45 @@
- html
+
 {% extends 'base.html' %}
 
 {% block title %}Login - Project Portal{% endblock %}
 
 {% block content %}
-<div class=&quot;row justify-content-center&quot;>
-    <div class=&quot;col-lg-5&quot;>
-        <div class=&quot;card shadow-lg border-0 rounded-lg mt-5&quot;>
-            <div class=&quot;card-header bg-primary text-white&quot;>
-                <h3 class=&quot;text-center font-weight-light my-2&quot;>Login</h3>
+<div class="row justify-content-center">
+    <div class="col-lg-5">
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <div class="card-header bg-primary text-white">
+                <h3 class="text-center font-weight-light my-2">Login</h3>
             </div>
-            <div class=&quot;card-body&quot;>
-                <form method=&quot;POST&quot; action=&quot;{{ url_for('auth.login') }}&quot;>
-                    <div class=&quot;mb-3&quot;>
-                        <label for=&quot;email&quot; class=&quot;form-label&quot;>Email</label>
-                        <div class=&quot;input-group&quot;>
-                            <span class=&quot;input-group-text&quot;><i class=&quot;fas fa-envelope&quot;></i></span>
-                            <input type=&quot;email&quot; class=&quot;form-control&quot; id=&quot;email&quot; name=&quot;email&quot; placeholder=&quot;Enter your email&quot; required>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('auth.login') }}">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
                         </div>
                     </div>
-                    <div class=&quot;mb-3&quot;>
-                        <label for=&quot;password&quot; class=&quot;form-label&quot;>Password</label>
-                        <div class=&quot;input-group&quot;>
-                            <span class=&quot;input-group-text&quot;><i class=&quot;fas fa-lock&quot;></i></span>
-                            <input type=&quot;password&quot; class=&quot;form-control&quot; id=&quot;password&quot; name=&quot;password&quot; placeholder=&quot;Enter your password&quot; required>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
                         </div>
                     </div>
-                    <div class=&quot;form-check mb-3&quot;>
-                        <input class=&quot;form-check-input&quot; type=&quot;checkbox&quot; id=&quot;remember&quot; name=&quot;remember&quot;>
-                        <label class=&quot;form-check-label&quot; for=&quot;remember&quot;>Remember me</label>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="remember" name="remember">
+                        <label class="form-check-label" for="remember">Remember me</label>
                     </div>
-                    <div class=&quot;d-grid&quot;>
-                        <button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;>
-                            <i class=&quot;fas fa-sign-in-alt me-2&quot;></i>Login
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login
                         </button>
                     </div>
                 </form>
             </div>
-            <div class=&quot;card-footer text-center py-3&quot;>
-                <div class=&quot;small&quot;>
-                    <a href=&quot;{{ url_for('auth.register') }}&quot;>Need an account? Sign up!</a>
+            <div class="card-footer text-center py-3">
+                <div class="small">
+                    <a href="{{ url_for('auth.register') }}">Need an account? Sign up!</a>
                 </div>
             </div>
         </div>

@@ -53,40 +53,40 @@
 {% endblock %}
 
 {% block content %}
-<div class=&quot;row mb-4&quot;>
-    <div class=&quot;col-md-8&quot;>
-        <h1 class=&quot;mb-2&quot;>Chatbot Assistant</h1>
-        <p class=&quot;text-muted&quot;>Ask questions about your tasks and projects</p>
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="mb-2">Chatbot Assistant</h1>
+        <p class="text-muted">Ask questions about your tasks and projects</p>
     </div>
 </div>
 
-<div class=&quot;row&quot;>
-    <div class=&quot;col-lg-8 col-md-10 mx-auto&quot;>
-        <div class=&quot;card shadow-sm&quot;>
-            <div class=&quot;card-header bg-primary text-white&quot;>
-                <h5 class=&quot;mb-0&quot;>
-                    <i class=&quot;fas fa-robot me-2&quot;></i>Project Assistant
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-robot me-2"></i>Project Assistant
                 </h5>
             </div>
-            <div class=&quot;card-body p-0&quot;>
-                <div class=&quot;chat-container&quot; id=&quot;chat-container&quot;>
-                    <div class=&quot;chat-message bot-message&quot;>
+            <div class="card-body p-0">
+                <div class="chat-container" id="chat-container">
+                    <div class="chat-message bot-message">
                         <div>Hello, {{ current_user.username }}! I'm your project assistant. How can I help you today?</div>
-                        <div class=&quot;message-time&quot;>Just now</div>
+                        <div class="message-time">Just now</div>
                     </div>
                 </div>
             </div>
-            <div class=&quot;card-footer&quot;>
-                <div class=&quot;suggestions&quot;>
-                    <div class=&quot;suggestion-chip&quot; onclick=&quot;sendSuggestion('How many tasks do I have?')&quot;>How many tasks do I have?</div>
-                    <div class=&quot;suggestion-chip&quot; onclick=&quot;sendSuggestion('What are my tasks?')&quot;>What are my tasks?</div>
-                    <div class=&quot;suggestion-chip&quot; onclick=&quot;sendSuggestion('What projects am I working on?')&quot;>What projects am I working on?</div>
-                    <div class=&quot;suggestion-chip&quot; onclick=&quot;sendSuggestion('Who is assigned to tasks I created?')&quot;>Who is assigned to tasks I created?</div>
+            <div class="card-footer">
+                <div class="suggestions">
+                    <div class="suggestion-chip" onclick="sendSuggestion('How many tasks do I have?')">How many tasks do I have?</div>
+                    <div class="suggestion-chip" onclick="sendSuggestion('What are my tasks?')">What are my tasks?</div>
+                    <div class="suggestion-chip" onclick="sendSuggestion('What projects am I working on?')">What projects am I working on?</div>
+                    <div class="suggestion-chip" onclick="sendSuggestion('Who is assigned to tasks I created?')">Who is assigned to tasks I created?</div>
                 </div>
-                <div class=&quot;input-group mt-3&quot;>
-                    <input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;message-input&quot; placeholder=&quot;Type your question here...&quot;>
-                    <button class=&quot;btn btn-primary&quot; id=&quot;send-button&quot;>
-                        <i class=&quot;fas fa-paper-plane&quot;></i>
+                <div class="input-group mt-3">
+                    <input type="text" class="form-control" id="message-input" placeholder="Type your question here...">
+                    <button class="btn btn-primary" id="send-button">
+                        <i class="fas fa-paper-plane"></i>
                     </button>
                 </div>
             </div>
@@ -123,7 +123,7 @@ messageInput.value = '';
 // Show loading indicator
 const loadingDiv = document.createElement('div');
 loadingDiv.className = 'chat-message bot-message';
-loadingDiv.innerHTML = '<div><i class=&quot;fas fa-spinner fa-spin&quot;></i> Thinking...</div>';
+loadingDiv.innerHTML = '<div><i class="fas fa-spinner fa-spin"></i> Thinking...</div>';
 chatContainer.appendChild(loadingDiv);
 chatContainer.scrollTop = chatContainer.scrollHeight;
 // Send message to API

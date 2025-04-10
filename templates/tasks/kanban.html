@@ -30,56 +30,56 @@
 {% endblock %}
 
 {% block content %}
-<div class=&quot;row mb-4&quot;>
-    <div class=&quot;col-md-8&quot;>
-        <h1 class=&quot;mb-2&quot;>{{ project.name }} - Kanban Board</h1>
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="mb-2">{{ project.name }} - Kanban Board</h1>
     </div>
-    <div class=&quot;col-md-4 text-end&quot;>
-        <div class=&quot;btn-group&quot; role=&quot;group&quot;>
-            <a href=&quot;{{ url_for('projects.view_project', project_id=project.id) }}&quot; class=&quot;btn btn-outline-primary&quot;>
-                <i class=&quot;fas fa-list me-1&quot;></i>List View
+    <div class="col-md-4 text-end">
+        <div class="btn-group" role="group">
+            <a href="{{ url_for('projects.view_project', project_id=project.id) }}" class="btn btn-outline-primary">
+                <i class="fas fa-list me-1"></i>List View
             </a>
-            <a href=&quot;{{ url_for('tasks.create_task', project_id=project.id) }}&quot; class=&quot;btn btn-primary&quot;>
-                <i class=&quot;fas fa-plus me-1&quot;></i>Add Task
+            <a href="{{ url_for('tasks.create_task', project_id=project.id) }}" class="btn btn-primary">
+                <i class="fas fa-plus me-1"></i>Add Task
             </a>
         </div>
     </div>
 </div>
-<div class=&quot;row&quot;>
-    <div class=&quot;col-md-4 mb-4&quot;>
-        <div class=&quot;kanban-column&quot;>
-            <div class=&quot;column-header bg-secondary text-white&quot;>
-                <h5 class=&quot;mb-0&quot;>To Do</h5>
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="kanban-column">
+            <div class="column-header bg-secondary text-white">
+                <h5 class="mb-0">To Do</h5>
             </div>
-            <div class=&quot;column-body&quot; id=&quot;todo-column&quot; data-status=&quot;To Do&quot;>
+            <div class="column-body" id="todo-column" data-status="To Do">
                 {% for task in task_columns['To Do'] %}
-                    <div class=&quot;card task-card&quot; data-task-id=&quot;{{ task.id }}&quot;>
-                        <div class=&quot;card-body&quot;>
-                            <h5 class=&quot;card-title&quot;>{{ task.title }}</h5>
-                            <p class=&quot;card-text&quot;>{{ task.description|truncate(100) if task.description else 'No description' }}</p>
-                            <div class=&quot;d-flex justify-content-between align-items-center&quot;>
-                                <span class=&quot;badge {% if task.priority == 'High' %}bg-danger{% elif task.priority == 'Medium' %}bg-warning{% else %}bg-info{% endif %}&quot;>
+                    <div class="card task-card" data-task-id="{{ task.id }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ task.title }}</h5>
+                            <p class="card-text">{{ task.description|truncate(100) if task.description else 'No description' }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge {% if task.priority == 'High' %}bg-danger{% elif task.priority == 'Medium' %}bg-warning{% else %}bg-info{% endif %}">
                                     {{ task.priority }}
                                 </span>
                                 <small>
                                     {% if task.assignee %}
-                                        <i class=&quot;fas fa-user me-1&quot;></i>{{ task.assignee.username }}
+                                        <i class="fas fa-user me-1"></i>{{ task.assignee.username }}
                                     {% else %}
-                                        <i class=&quot;fas fa-user-slash me-1&quot;></i>Unassigned
+                                        <i class="fas fa-user-slash me-1"></i>Unassigned
                                     {% endif %}
                                 </small>
                             </div>
                         </div>
-                        <div class=&quot;card-footer d-flex justify-content-between align-items-center&quot;>
-                            <small class=&quot;text-muted&quot;>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <small class="text-muted">
                                 {% if task.due_date %}
-                                    <i class=&quot;fas fa-calendar-alt me-1&quot;></i>{{ task.due_date.strftime('%Y-%m-%d') }}
+                                    <i class="fas fa-calendar-alt me-1"></i>{{ task.due_date.strftime('%Y-%m-%d') }}
                                 {% else %}
-                                    <i class=&quot;fas fa-calendar-times me-1&quot;></i>No due date
+                                    <i class="fas fa-calendar-times me-1"></i>No due date
                                 {% endif %}
                             </small>
-                            <a href=&quot;{{ url_for('tasks.view_task', task_id=task.id) }}&quot; class=&quot;btn btn-sm btn-outline-primary&quot;>
-                                <i class=&quot;fas fa-eye&quot;></i>
+                            <a href="{{ url_for('tasks.view_task', task_id=task.id) }}" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-eye"></i>
                             </a>
                         </div>
                     </div>
@@ -88,40 +88,40 @@
         </div>
     </div>
 
-    <div class=&quot;col-md-4 mb-4&quot;>
-        <div class=&quot;kanban-column&quot;>
-            <div class=&quot;column-header bg-primary text-white&quot;>
-                <h5 class=&quot;mb-0&quot;>In Progress</h5>
+    <div class="col-md-4 mb-4">
+        <div class="kanban-column">
+            <div class="column-header bg-primary text-white">
+                <h5 class="mb-0">In Progress</h5>
             </div>
-            <div class=&quot;column-body&quot; id=&quot;in-progress-column&quot; data-status=&quot;In Progress&quot;>
+            <div class="column-body" id="in-progress-column" data-status="In Progress">
                 {% for task in task_columns['In Progress'] %}
-                    <div class=&quot;card task-card&quot; data-task-id=&quot;{{ task.id }}&quot;>
-                        <div class=&quot;card-body&quot;>
-                            <h5 class=&quot;card-title&quot;>{{ task.title }}</h5>
-                            <p class=&quot;card-text&quot;>{{ task.description|truncate(100) if task.description else 'No description' }}</p>
-                            <div class=&quot;d-flex justify-content-between align-items-center&quot;>
-                                <span class=&quot;badge {% if task.priority == 'High' %}bg-danger{% elif task.priority == 'Medium' %}bg-warning{% else %}bg-info{% endif %}&quot;>
+                    <div class="card task-card" data-task-id="{{ task.id }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ task.title }}</h5>
+                            <p class="card-text">{{ task.description|truncate(100) if task.description else 'No description' }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge {% if task.priority == 'High' %}bg-danger{% elif task.priority == 'Medium' %}bg-warning{% else %}bg-info{% endif %}">
                                     {{ task.priority }}
                                 </span>
                                 <small>
                                     {% if task.assignee %}
-                                        <i class=&quot;fas fa-user me-1&quot;></i>{{ task.assignee.username }}
+                                        <i class="fas fa-user me-1"></i>{{ task.assignee.username }}
                                     {% else %}
-                                        <i class=&quot;fas fa-user-slash me-1&quot;></i>Unassigned
+                                        <i class="fas fa-user-slash me-1"></i>Unassigned
                                     {% endif %}
                                 </small>
                             </div>
                         </div>
-                        <div class=&quot;card-footer d-flex justify-content-between align-items-center&quot;>
-                            <small class=&quot;text-muted&quot;>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <small class="text-muted">
                                 {% if task.due_date %}
-                                    <i class=&quot;fas fa-calendar-alt me-1&quot;></i>{{ task.due_date.strftime('%Y-%m-%d') }}
+                                    <i class="fas fa-calendar-alt me-1"></i>{{ task.due_date.strftime('%Y-%m-%d') }}
                                 {% else %}
-                                    <i class=&quot;fas fa-calendar-times me-1&quot;></i>No due date
+                                    <i class="fas fa-calendar-times me-1"></i>No due date
                                 {% endif %}
                             </small>
-                            <a href=&quot;{{ url_for('tasks.view_task', task_id=task.id) }}&quot; class=&quot;btn btn-sm btn-outline-primary&quot;>
-                                <i class=&quot;fas fa-eye&quot;></i>
+                            <a href="{{ url_for('tasks.view_task', task_id=task.id) }}" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-eye"></i>
                             </a>
                         </div>
                     </div>
@@ -129,40 +129,40 @@
             </div>
         </div>
     </div>
-   <div class=&quot;col-md-4 mb-4&quot;>
-        <div class=&quot;kanban-column&quot;>
-            <div class=&quot;column-header bg-success text-white&quot;>
-                <h5 class=&quot;mb-0&quot;>Done</h5>
+   <div class="col-md-4 mb-4">
+        <div class="kanban-column">
+            <div class="column-header bg-success text-white">
+                <h5 class="mb-0">Done</h5>
             </div>
-            <div class=&quot;column-body&quot; id=&quot;done-column&quot; data-status=&quot;Done&quot;>
+            <div class="column-body" id="done-column" data-status="Done">
                 {% for task in task_columns['Done'] %}
-                    <div class=&quot;card task-card&quot; data-task-id=&quot;{{ task.id }}&quot;>
-                        <div class=&quot;card-body&quot;>
-                            <h5 class=&quot;card-title&quot;>{{ task.title }}</h5>
-                            <p class=&quot;card-text&quot;>{{ task.description|truncate(100) if task.description else 'No description' }}</p>
-                            <div class=&quot;d-flex justify-content-between align-items-center&quot;>
-                                <span class=&quot;badge {% if task.priority == 'High' %}bg-danger{% elif task.priority == 'Medium' %}bg-warning{% else %}bg-info{% endif %}&quot;>
+                    <div class="card task-card" data-task-id="{{ task.id }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ task.title }}</h5>
+                            <p class="card-text">{{ task.description|truncate(100) if task.description else 'No description' }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge {% if task.priority == 'High' %}bg-danger{% elif task.priority == 'Medium' %}bg-warning{% else %}bg-info{% endif %}">
                                     {{ task.priority }}
                                 </span>
                                 <small>
                                     {% if task.assignee %}
-                                        <i class=&quot;fas fa-user me-1&quot;></i>{{ task.assignee.username }}
+                                        <i class="fas fa-user me-1"></i>{{ task.assignee.username }}
                                     {% else %}
-                                        <i class=&quot;fas fa-user-slash me-1&quot;></i>Unassigned
+                                        <i class="fas fa-user-slash me-1"></i>Unassigned
                                     {% endif %}
                                 </small>
                             </div>
                         </div>
-                        <div class=&quot;card-footer d-flex justify-content-between align-items-center&quot;>
-                            <small class=&quot;text-muted&quot;>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <small class="text-muted">
                                 {% if task.due_date %}
-                                    <i class=&quot;fas fa-calendar-alt me-1&quot;></i>{{ task.due_date.strftime('%Y-%m-%d') }}
+                                    <i class="fas fa-calendar-alt me-1"></i>{{ task.due_date.strftime('%Y-%m-%d') }}
                                 {% else %}
-                                    <i class=&quot;fas fa-calendar-times me-1&quot;></i>No due date
+                                    <i class="fas fa-calendar-times me-1"></i>No due date
                                 {% endif %}
                             </small>
-                            <a href=&quot;{{ url_for('tasks.view_task', task_id=task.id) }}&quot; class=&quot;btn btn-sm btn-outline-primary&quot;>
-                                <i class=&quot;fas fa-eye&quot;></i>
+                            <a href="{{ url_for('tasks.view_task', task_id=task.id) }}" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-eye"></i>
                             </a>
                         </div>
                     </div>
@@ -173,7 +173,7 @@
 </div>
 
 {% block extra_js %}
-script src=&quot;https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js&quot;</script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"</script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Initialize Sortable for each column
