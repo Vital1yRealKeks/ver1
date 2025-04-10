@@ -1,0 +1,39 @@
+html
+{% extends 'base.html' %}
+
+{% block title %}Create Project - Project Portal{% endblock %}
+
+{% block content %}
+<div class=&quot;row justify-content-center&quot;>
+    <div class=&quot;col-lg-8&quot;>
+        <div class=&quot;card shadow-lg border-0 rounded-lg mt-4&quot;>
+            <div class=&quot;card-header bg-primary text-white&quot;>
+                <h3 class=&quot;text-center font-weight-light my-2&quot;>Create New Project</h3>
+            </div>
+            <div class=&quot;card-body&quot;>
+                <form method=&quot;POST&quot; action=&quot;{{ url_for('projects.create_project') }}&quot;>
+                    <div class=&quot;mb-3&quot;>
+                        <label for=&quot;name&quot; class=&quot;form-label&quot;>Project Name</label>
+                        <div class=&quot;input-group&quot;>
+                            <span class=&quot;input-group-text&quot;><i class=&quot;fas fa-project-diagram&quot;></i></span>
+                            <input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;name&quot; name=&quot;name&quot; placeholder=&quot;Enter project name&quot; required>
+                        </div>
+                    </div>
+                    <div class=&quot;mb-3&quot;>
+                        <label for=&quot;description&quot; class=&quot;form-label&quot;>Description</label>
+                        <textarea class=&quot;form-control&quot; id=&quot;description&quot; name=&quot;description&quot; rows=&quot;4&quot; placeholder=&quot;Enter project description&quot;></textarea>
+                    </div>
+                    <div class=&quot;d-flex justify-content-between&quot;>
+                        <a href=&quot;{{ url_for('projects.list_projects') }}&quot; class=&quot;btn btn-outline-secondary&quot;>
+                            <i class=&quot;fas fa-arrow-left me-1&quot;></i>Cancel
+                        </a>
+                        <button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;>
+                            <i class=&quot;fas fa-save me-1&quot;></i>Create Project
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

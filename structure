@@ -1,0 +1,42 @@
+project_portal/
+├── app.py                  # Main Flask application
+├── extensions.py           # Flask extensions
+├── models.py               # Database models
+├── config.py               # Configuration settings
+├── utils/
+│   ├── __init__.py
+│   ├── kanban.py           # Kanban board helper functions
+│   └── chatbot.py          # Chatbot helper functions
+├── routes/
+│   ├── __init__.py
+│   ├── auth.py             # Authentication routes
+│   ├── projects.py         # Project management routes
+│   ├── tasks.py            # Task management routes
+│   └── chatbot.py          # Chatbot routes
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   ├── auth.js
+│   │   ├── projects.js
+│   │   ├── tasks.js
+│   │   ├── kanban.js
+│   │   └── chatbot.js
+│   └── img/
+├── templates/
+│   ├── base.html
+│   ├── index.html
+│   ├── auth/
+│   │   ├── login.html
+│   │   └── register.html
+│   ├── dashboard.html
+│   ├── projects/
+│   │   ├── list.html
+│   │   ├── create.html
+│   │   └── detail.html
+│   ├── tasks/
+│   │   ├── list.html
+│   │   └── kanban.html
+│   └── chatbot.html
+└── instance/
+    └── database.db         # SQLite database

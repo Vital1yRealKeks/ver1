@@ -1,0 +1,48 @@
+ html
+{% extends 'base.html' %}
+
+{% block title %}Login - Project Portal{% endblock %}
+
+{% block content %}
+<div class=&quot;row justify-content-center&quot;>
+    <div class=&quot;col-lg-5&quot;>
+        <div class=&quot;card shadow-lg border-0 rounded-lg mt-5&quot;>
+            <div class=&quot;card-header bg-primary text-white&quot;>
+                <h3 class=&quot;text-center font-weight-light my-2&quot;>Login</h3>
+            </div>
+            <div class=&quot;card-body&quot;>
+                <form method=&quot;POST&quot; action=&quot;{{ url_for('auth.login') }}&quot;>
+                    <div class=&quot;mb-3&quot;>
+                        <label for=&quot;email&quot; class=&quot;form-label&quot;>Email</label>
+                        <div class=&quot;input-group&quot;>
+                            <span class=&quot;input-group-text&quot;><i class=&quot;fas fa-envelope&quot;></i></span>
+                            <input type=&quot;email&quot; class=&quot;form-control&quot; id=&quot;email&quot; name=&quot;email&quot; placeholder=&quot;Enter your email&quot; required>
+                        </div>
+                    </div>
+                    <div class=&quot;mb-3&quot;>
+                        <label for=&quot;password&quot; class=&quot;form-label&quot;>Password</label>
+                        <div class=&quot;input-group&quot;>
+                            <span class=&quot;input-group-text&quot;><i class=&quot;fas fa-lock&quot;></i></span>
+                            <input type=&quot;password&quot; class=&quot;form-control&quot; id=&quot;password&quot; name=&quot;password&quot; placeholder=&quot;Enter your password&quot; required>
+                        </div>
+                    </div>
+                    <div class=&quot;form-check mb-3&quot;>
+                        <input class=&quot;form-check-input&quot; type=&quot;checkbox&quot; id=&quot;remember&quot; name=&quot;remember&quot;>
+                        <label class=&quot;form-check-label&quot; for=&quot;remember&quot;>Remember me</label>
+                    </div>
+                    <div class=&quot;d-grid&quot;>
+                        <button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;>
+                            <i class=&quot;fas fa-sign-in-alt me-2&quot;></i>Login
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class=&quot;card-footer text-center py-3&quot;>
+                <div class=&quot;small&quot;>
+                    <a href=&quot;{{ url_for('auth.register') }}&quot;>Need an account? Sign up!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

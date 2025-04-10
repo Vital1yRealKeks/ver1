@@ -1,0 +1,55 @@
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+}
+/* Card Styles */
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: box-shadow 0.3s ease;
+}
+.card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+/* Navbar Styles */
+.navbar-brand {
+    font-weight: 600;
+}
+/* Button Styles */
+.btn {
+    border-radius: 0.25rem;
+    font-weight: 500;
+}
+/* Form Styles */
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+/* Kanban Board Styles */
+.kanban-column {
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+}
+.task-card {
+    transition: transform 0.2s ease;
+}
+.task-card:hover {
+    transform: translateY(-2px);
+}
+/* Dashboard Styles */
+.dashboard-container {
+    padding: 1.5rem;
+}
+/* Footer Styles */
+footer {
+    margin-top: 3rem;
+}
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1rem;
+    }
+    h1 {
+        font-size: 1.75rem;
+    }
+}

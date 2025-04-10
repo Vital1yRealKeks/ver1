@@ -1,0 +1,222 @@
+ html
+{% extends 'base.html' %}
+
+{% block title %}{{ project.name }} - Project Portal{% endblock %}
+
+{% block content %}
+<div class=&quot;row mb-4&quot;>
+    <div class=&quot;col-md-8&quot;>
+        <h1 class=&quot;mb-2&quot;>{{ project.name }}</h1>
+        <p class=&quot;text-muted&quot;>
+            Created on {{ project.created_at.strftime('%Y-%m-%d') }} by {{ project.creator.username }}
+        </p>
+    </div>
+    <div class=&quot;col-md-4 text-end&quot;>
+        <div class=&quot;btn-group&quot; role=&quot;group&quot;>
+            {% if user_role in ['admin', 'manager'] %}
+                <a href=&quot;{{ url_for('projects.edit_project', project_id=project.id) }}&quot; class=&quot;btn btn-outline-primary&quot;>
+                    <i class=&quot;fas fa-edit me-1&quot;></i>Edit
+                </a>
+                <button type=&quot;button&quot; class=&quot;btn btn-outline-primary&quot; data-bs-toggle=&quot;modal&quot; data-bs-target=&quot;#inviteModal&quot;>
+                    <i class=&quot;fas fa-user-plus me-1&quot;></i>Invite
+                </button>
+                {% if user_role == 'admin' %}
+                    <button type=&quot;button&quot; class=&quot;btn btn-outline-danger&quot; data-bs-toggle=&quot;modal&quot; data-bs-target=&quot;#deleteProjectModal&quot;>
+                        <i class=&quot;fas fa-trash-alt me-1&quot;></i>Delete
+                    </button>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class=&quot;row mb-4&quot;>
+    <div class=&quot;col-md-8&quot;>
+        <div class=&quot;card shadow-sm&quot;>
+            <div class=&quot;card-header bg-primary text-white&quot;>
+                <h5 class=&quot;mb-0&quot;>
+                    <i class=&quot;fas fa-info-circle me-2&quot;></i>Project Details
+                </h5>
+            </div>
+            <div class=&quot;card-body&quot;>
+                <p>{{ project.description if project.description else 'No description provided.' }}</p>
+            </div>
+        </div>
+    </div>
+    <div class=&quot;col-md-4&quot;>
+        <div class=&quot;card shadow-sm&quot;>
+            <div class=&quot;card-header bg-primary text-white&quot;>
+                <h5 class=&quot;mb-0&quot;>
+                    <i class=&quot;fas fa-chart-pie me-2&quot;></i>Project Stats
+                </h5>
+            </div>
+            <div class=&quot;card-body&quot;>
+                <div class=&quot;row text-center&quot;>
+                    <div class=&quot;col-4&quot;>
+                        <h4>{{ tasks|selectattr('status', 'equalto', 'To Do')|list|length }}</h4>
+                        <p class=&quot;text-muted mb-0&quot;>To Do</p>
+                    </div>
+                    <div class=&quot;col-4&quot;>
+                        <h4>{{ tasks|selectattr('status', 'equalto', 'In Progress')|list|length }}</h4>
+                        <p class=&quot;text-muted mb-0&quot;>In Progress</p>
+                    </div>
+                    <div class=&quot;col-4&quot;>
+                        <h4>{{ tasks|selectattr('status', 'equalto', 'Done')|list|length }}</h4>
+                        <p class=&quot;text-muted mb-0&quot;>Done</p>
+                    </div>
+                </div>
+                <hr>
+                <p class=&quot;mb-1&quot;>
+                    <i class=&quot;fas fa-users me-2&quot;></i>Members: <strong>{{ members|length }}</strong>
+                </p>
+                <p class=&quot;mb-0&quot;>
+                    <i class=&quot;fas fa-tasks me-2&quot;></i>Tasks: <strong>{{ tasks|length }}</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+ <div class=&quot;row mb-4&quot;>
+    <div class=&quot;col-12&quot;>
+        <div class=&quot;card shadow-sm&quot;>
+            <div class=&quot;card-header bg-primary text-white d-flex justify-content-between align-items-center&quot;>
+                <h5 class=&quot;mb-0&quot;>
+                    <i class=&quot;fas fa-tasks me-2&quot;></i>Tasks
+                </h5>
+                <div>
+                    <a href=&quot;{{ url_for('tasks.create_task', project_id=project.id) }}&quot; class=&quot;btn btn-sm btn-light&quot;>
+                        <i class=&quot;fas fa-plus me-1&quot;></i>Add Task
+                    </a>
+                    <a href=&quot;{{ url_for('tasks.kanban_board', project_id=project.id) }}&quot; class=&quot;btn btn-sm btn-light ms-2&quot;>
+                        <i class=&quot;fas fa-columns me-1&quot;></i>Kanban View
+                    </a>
+                </div>
+            </div>
+            <div class=&quot;card-body&quot;>
+                {% if tasks %}
+                    <div class=&quot;table-responsive&quot;>
+                        <table class=&quot;table table-hover&quot;>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Priority</th>
+                                    <th>Assignee</th>
+                                    <th>Due Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for task in tasks %}
+                                    <tr>
+                                        <td>
+                                            <a href=&quot;{{ url_for('tasks.view_task', task_id=task.id) }}&quot;>{{ task.title }}</a>
+                                        </td>
+                                        <td>
+                                            <span class=&quot;badge {% if task.status == 'To Do' %}bg-secondary{% elif task.status == 'In Progress' %}bg-primary{% else %}bg-success{% endif %}&quot;>
+                                                {{ task.status }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class=&quot;badge {% if task.priority == 'High' %}bg-danger{% elif task.priority == 'Medium' %}bg-warning{% else %}bg-info{% endif %}&quot;>
+                                                {{ task.priority }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            {% if task.assignee %}
+                                                {{ task.assignee.username }}
+                                            {% else %}
+                                                <span class=&quot;text-muted&quot;>Unassigned</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if task.due_date %}
+                                                {{ task.due_date.strftime('%Y-%m-%d') }}
+                                            {% else %}
+                                                <span class=&quot;text-muted&quot;>No due date</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class=&quot;btn-group btn-group-sm&quot; role=&quot;group&quot;>
+                                                <a href=&quot;{{ url_for('tasks.view_task', task_id=task.id) }}&quot; class=&quot;btn btn-outline-primary&quot;>
+                                                    <i class=&quot;fas fa-eye&quot;></i>
+                                                </a>
+                                                <a href=&quot;{{ url_for('tasks.edit_task', task_id=task.id) }}&quot; class=&quot;btn btn-outline-primary&quot;>
+                                                    <i class=&quot;fas fa-edit&quot;></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class=&quot;alert alert-info&quot;>
+                        <i class=&quot;fas fa-info-circle me-2&quot;></i>No tasks have been created for this project yet.
+                    </div>
+                    <div class=&quot;text-center mt-3&quot;>
+                        <a href=&quot;{{ url_for('tasks.create_task', project_id=project.id) }}&quot; class=&quot;btn btn-primary&quot;>
+                            <i class=&quot;fas fa-plus me-1&quot;></i>Create First Task
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+ <div class=&quot;modal fade&quot; id=&quot;inviteModal&quot; tabindex=&quot;-1&quot; aria-labelledby=&quot;inviteModalLabel&quot; aria-hidden=&quot;true&quot;>
+    <div class=&quot;modal-dialog&quot;>
+        <div class=&quot;modal-content&quot;>
+            <div class=&quot;modal-header bg-primary text-white&quot;>
+                <h5 class=&quot;modal-title&quot; id=&quot;inviteModalLabel&quot;>Invite User to Project</h5>
+                <button type=&quot;button&quot; class=&quot;btn-close btn-close-white&quot; data-bs-dismiss=&quot;modal&quot; aria-label=&quot;Close&quot;></button>
+            </div>
+            <form method=&quot;POST&quot; action=&quot;{{ url_for('projects.invite_user', project_id=project.id) }}&quot;>
+                <div class=&quot;modal-body&quot;>
+                    <div class=&quot;mb-3&quot;>
+                        <label for=&quot;email&quot; class=&quot;form-label&quot;>Email Address</label>
+                        <input type=&quot;email&quot; class=&quot;form-control&quot; id=&quot;email&quot; name=&quot;email&quot; placeholder=&quot;Enter email address&quot; required>
+                    </div>
+                    <div class=&quot;mb-3&quot;>
+                        <label for=&quot;role&quot; class=&quot;form-label&quot;>Role</label>
+                        <select class=&quot;form-select&quot; id=&quot;role&quot; name=&quot;role&quot;>
+                            <option value=&quot;member&quot;>Member</option>
+                            <option value=&quot;manager&quot;>Manager</option>
+                            {% if user_role == 'admin' %}
+                                <option value=&quot;admin&quot;>Admin</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                </div>
+                <div class=&quot;modal-footer&quot;>
+                    <button type=&quot;button&quot; class=&quot;btn btn-secondary&quot; data-bs-dismiss=&quot;modal&quot;>Cancel</button>
+                    <button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;>Send Invitation</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class=&quot;modal fade&quot; id=&quot;deleteProjectModal&quot; tabindex=&quot;-1&quot; aria-labelledby=&quot;deleteProjectModalLabel&quot; aria-hidden=&quot;true&quot;>
+    <div class=&quot;modal-dialog&quot;>
+        <div class=&quot;modal-content&quot;>
+            <div class=&quot;modal-header bg-danger text-white&quot;>
+                <h5 class=&quot;modal-title&quot; id=&quot;deleteProjectModalLabel&quot;>Delete Project</h5>
+                <button type=&quot;button&quot; class=&quot;btn-close btn-close-white&quot; data-bs-dismiss=&quot;modal&quot; aria-label=&quot;Close&quot;></button>
+            </div>
+            <div class=&quot;modal-body&quot;>
+                <p>Are you sure you want to delete this project? This action cannot be undone and will delete all tasks associated with this project.</p>
+                <p class=&quot;fw-bold&quot;>Project: {{ project.name }}</p>
+            </div>
+            <div class=&quot;modal-footer&quot;>
+                <button type=&quot;button&quot; class=&quot;btn btn-secondary&quot; data-bs-dismiss=&quot;modal&quot;>Cancel</button>
+                <form method=&quot;POST&quot; action=&quot;{{ url_for('projects.delete_project', project_id=project.id) }}&quot;>
+                    <button type=&quot;submit&quot; class=&quot;btn btn-danger&quot;>Delete Project</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

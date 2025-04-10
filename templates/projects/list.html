@@ -1,0 +1,56 @@
+ html
+{% extends 'base.html' %}
+
+{% block title %}My Projects - Project Portal{% endblock %}
+
+{% block content %}
+<div class=&quot;row mb-4&quot;>
+    <div class=&quot;col-md-8&quot;>
+        <h1 class=&quot;mb-4&quot;>My Projects</h1>
+    </div>
+    <div class=&quot;col-md-4 text-end&quot;>
+        <a href=&quot;{{ url_for('projects.create_project') }}&quot; class=&quot;btn btn-primary&quot;>
+            <i class=&quot;fas fa-plus me-1&quot;></i>New Project
+        </a>
+    </div>
+</div>
+
+<div class=&quot;row&quot;>
+    {% if projects %}
+        {% for project in projects %}
+            <div class=&quot;col-md-6 col-lg-4 mb-4&quot;>
+                <div class=&quot;card h-100 shadow-sm&quot;>
+                    <div class=&quot;card-header bg-primary text-white&quot;>
+                        <h5 class=&quot;mb-0&quot;>{{ project.name }}</h5>
+                    </div>
+                    <div class=&quot;card-body&quot;>
+                        <p class=&quot;card-text&quot;>{{ project.description|truncate(150) if project.description else 'No description' }}</p>
+                        <div class=&quot;d-flex justify-content-between align-items-center&quot;>
+                            <small class=&quot;text-muted&quot;>Created: {{ project.created_at.strftime('%Y-%m-%d') }}</small>
+                            <span class=&quot;badge bg-info&quot;>{{ project.tasks|length }} tasks</span>
+                        </div>
+                    </div>
+                    <div class=&quot;card-footer&quot;>
+                        <div class=&quot;d-grid gap-2&quot;>
+                            <a href=&quot;{{ url_for('projects.view_project', project_id=project.id) }}&quot; class=&quot;btn btn-outline-primary&quot;>
+                                <i class=&quot;fas fa-eye me-1&quot;></i>View Project
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class=&quot;col-12&quot;>
+            <div class=&quot;alert alert-info&quot;>
+                <i class=&quot;fas fa-info-circle me-2&quot;></i>You don't have any projects yet.
+            </div>
+            <div class=&quot;text-center mt-4&quot;>
+                <a href=&quot;{{ url_for('projects.create_project') }}&quot; class=&quot;btn btn-primary&quot;>
+                    <i class=&quot;fas fa-plus me-1&quot;></i>Create Your First Project
+                </a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

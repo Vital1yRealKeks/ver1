@@ -1,0 +1,56 @@
+html
+{% extends 'base.html' %}
+
+{% block title %}Welcome to Project Portal{% endblock %}
+
+{% block content %}
+<div class=&quot;row justify-content-center&quot;>
+    <div class=&quot;col-md-8 text-center&quot;>
+        <div class=&quot;card shadow-lg border-0 rounded-lg mt-5&quot;>
+            <div class=&quot;card-body p-5&quot;>
+                <h1 class=&quot;display-4 mb-4&quot;>Welcome to Project Portal</h1>
+                <p class=&quot;lead mb-4&quot;>A powerful platform for managing projects and tasks with your team.</p>
+                
+                <div class=&quot;row mb-4&quot;>
+                    <div class=&quot;col-md-4&quot;>
+                        <div class=&quot;card mb-3&quot;>
+                            <div class=&quot;card-body&quot;>
+                                <i class=&quot;fas fa-project-diagram fa-3x mb-3 text-primary&quot;></i>
+                                <h5 class=&quot;card-title&quot;>Project Management</h5>
+                                <p class=&quot;card-text&quot;>Create and manage projects with your team.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=&quot;col-md-4&quot;>
+                        <div class=&quot;card mb-3&quot;>
+                            <div class=&quot;card-body&quot;>
+                                <i class=&quot;fas fa-tasks fa-3x mb-3 text-primary&quot;></i>
+                                <h5 class=&quot;card-title&quot;>Task Tracking</h5>
+                                <p class=&quot;card-text&quot;>Track tasks with Kanban boards or lists.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=&quot;col-md-4&quot;>
+                        <div class=&quot;card mb-3&quot;>
+                            <div class=&quot;card-body&quot;>
+                                <i class=&quot;fas fa-robot fa-3x mb-3 text-primary&quot;></i>
+                                <h5 class=&quot;card-title&quot;>Chatbot Assistant</h5>
+                                <p class=&quot;card-text&quot;>Get quick updates on your tasks and projects.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class=&quot;d-grid gap-2 d-md-block&quot;>
+                    <a href=&quot;{{ url_for('auth.login') }}&quot; class=&quot;btn btn-primary btn-lg me-md-2&quot;>
+                        <i class=&quot;fas fa-sign-in-alt me-2&quot;></i>Login
+                    </a>
+                    <a href=&quot;{{ url_for('auth.register') }}&quot; class=&quot;btn btn-outline-primary btn-lg&quot;>
+                        <i class=&quot;fas fa-user-plus me-2&quot;></i>Register
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
