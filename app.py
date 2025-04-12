@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template, redirect, url_for
 from extensions import db, bcrypt, login_manager, migrate, csrf
 from models import User
 from config import Config
@@ -35,6 +35,11 @@ def create_app(config_class=Config):
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
+    
+    # Add a route for the root URL
+    @app.route('/')
+    def index():
+        return render_template('index.html')
 
     # Create database tables
     with app.app_context():
